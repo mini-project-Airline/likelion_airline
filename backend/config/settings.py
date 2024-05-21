@@ -15,12 +15,13 @@ from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = config('SECRET_KEY')
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'django-insecure-hoyed+_al9@mgz5!md8=0*h^=vnk-nyax3fef7lv4gk#412(jp'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,8 +38,27 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_frame'
+    # 라이브러리
+    'rest_framework',   # RESTful API : 생성, 사용자 인증, 시리얼라이즈, 뷰 및 URL 라우팅을 지원하는 다양한 기능
+    'rest_framework.authtoken',
+    'corsheaders',      # CORS (Cross-Origin Resource Sharing)
+    'drf_yasg',         # Django REST Framework로 작성된 API에 대한 Swagger 문서를 자동으로 생성하는 도구
+    # 앱
+    'api.users',
+    'api.tickets',
+    'api.flights',
+    'api.auths',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
+
+# 커스텀 사용자 모델 지정
+AUTH_USER_MODEL = 'users.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -48,13 +68,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'rest_framework',   # RESTful API : 생성, 사용자 인증, 시리얼라이즈, 뷰 및 URL 라우팅을 지원하는 다양한 기능
-    'corsheaders',      # CORS (Cross-Origin Resource Sharing)
-    'drf_yasg',         # Django REST Framework로 작성된 API에 대한 Swagger 문서를 자동으로 생성하는 도구
-    'api.users',
-    'api.tickets',
-    'api.flights',
-    'api.auths',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -113,7 +127,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
