@@ -70,7 +70,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['firstName', 'lastName']  # 유저 생성 시 입력해야할 필수 필드
 
     def __str__(self):
-        return self.email
+        return self.user
 
     # 유저 특정 권한 확인
     def has_perm(self, perm, obj=None):

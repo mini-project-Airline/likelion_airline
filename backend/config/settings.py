@@ -51,10 +51,19 @@ INSTALLED_APPS = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ],
+   'DEFAULT_AUTHENTICATION_CLASSES': (
+       'rest_framework.authentication.TokenAuthentication',
+       'rest_framework_simplejwt.authentication.JWTAuthentication',
+   ),
+#    'DEFAULT_PERMISSION_CLASSES': (
+#         'rest_framework.permissions.IsAdminUser'
+#    ),
+}
+
+SIMPLE_JWT = {
+     # Use JWT 
+     'AUTH_HEADER_TYPES': ('JWT',),
+     # 'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
 # 커스텀 사용자 모델 지정
@@ -68,8 +77,16 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',   # CORS
+    'django.middleware.common.CommonMiddleware',
 ]
+
+# 특정 도메인에서의 CORS 요청만 허용
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',  # React 앱
+]
+
+APPEND_SLASH = False
 
 ROOT_URLCONF = 'config.urls'
 
