@@ -51,9 +51,9 @@ export default function SignUp() {
       email: data.get('email'),
       password: data.get('password'),
     };
-
+    
     try {
-      await axiosInstance.post('/signup', user);
+      await axiosInstance.post('/signup/', user);
       toast.success('Sign up successful! Redirecting to login page...');
       setTimeout(() => {
         navigate('/login');
