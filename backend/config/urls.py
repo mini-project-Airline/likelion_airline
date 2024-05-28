@@ -35,8 +35,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),  # 관리자페이지
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),  # API 문서
 
-    # path('', include("api.auths.urls")),
+    path('', include("api.auths.urls")),
     path('', include("api.users.urls")),
-    # path('', include("api.flights.urls")),
+    path('', include("api.flights.urls")),
     # path('', include("api.tickets.urls")),
 ]
